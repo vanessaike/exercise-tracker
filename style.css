@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500&display=swap');
+
+:root {
+    --highlight-color: #87B4B4;
+    --main-color: #878888;
+    --bg-color: #F4F4F4
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: "Manrope", sans-serif;
+    background-color: var(--bg-color);
+    min-height: 100vh;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/* TITLE */
+h1 {
+    color: var(--highlight-color);
+    font-size: 4rem;
+    font-weight: normal;
+}
+
+hr {
+    height: 1px;
+    border: none;
+    background-color: var(--highlight-color);
+}
+
+/* WORKOUTS */
+.container {
+    flex: 1;
+}
+
+.container-workouts {
+    padding: 5rem;
+}

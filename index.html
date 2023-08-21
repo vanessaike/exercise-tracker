@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+    <script src="https://kit.fontawesome.com/81837a0584.js" crossorigin="anonymous"></script>
+    <script defer src="dist/main.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Exercise Tracker</title>
+</head>
+<body>
+    <main>
+        <div class="container container-workouts">
+            <div class="title">
+                <h1>Exercise Tracker <i class="fas fa-map-marker-alt"></i></h1>
+                <hr>
+            </div>
+            <ul class="workouts">
+                <li class="workout">
+                    <div class="workout-title"></div>
+                    <div class="workout-info"></div>
+                </li>
+            </ul>
+        </div>
+        <div class="container container-map">
+            <div id="map"></div>
+        </div>
+    </main>
+</body>
+</html>
