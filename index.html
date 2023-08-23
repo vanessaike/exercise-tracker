@@ -1,36 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
     <script src="https://kit.fontawesome.com/81837a0584.js" crossorigin="anonymous"></script>
     <script defer src="dist/main.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <title>Exercise Tracker</title>
-</head>
-<body>
-    <main>
-        <div class="container container-workouts">
-            <div class="title">
-                <h1>Exercise Tracker <i class="fas fa-map-marker-alt"></i></h1>
-                <hr>
+  </head>
+  <body>
+    <div class="overlay hidden"></div>
+    <div class="wrapper--page">
+      <div class="sidebar">
+        <h1 class="title">Exercise Tracker <i class="fas fa-map-marker-alt title__icon" aria-hidden="true"></i></h1>
+        <hr />
+
+        <ul class="workouts">
+          <!-- <li class="workout workout--running" data-id="123456">
+            <div class="workout__header">
+              <div class="workout__title" aria-label="running">
+                <i class="fas fa-running" aria-hidden="true"></i> Running
+              </div>
+              <button class="btn btn--delete-workout" aria-label="Delete workout">
+                <i class="far fa-times-circle" aria-hidden="true"></i>
+              </button>
             </div>
-            <ul class="workouts">
-                <li class="workout">
-                    <div class="workout-title"></div>
-                    <div class="workout-info"></div>
-                </li>
-            </ul>
+            <div class="workout__row">
+              <div class="workout__details">
+                <span class="workout__icon"><i class="fas fa-calendar-alt" aria-hidden="true"></i></span>
+                <span class="workout__value">08/22/2023</span>
+              </div>
+              <div class="workout__details">
+                <span class="workout__icon"><i class="fas fa-stopwatch" aria-hidden="true"></i></span>
+                <span class="workout__value">40</span>
+                <span class="workout__unit">min</span>
+              </div>
+              <div class="workout__details">
+                <span class="workout__icon"><i class="fas fa-bolt" aria-hidden="true"></i></span>
+                <span class="workout__value">2</span>
+                <span class="workout__unit">km</span>
+              </div>
+            </div>
+          </li> -->
+        </ul>
+
+        <div class="wrapper--btn-reset">
+          <button class="btn btn--reset">Delete all workouts</button>
         </div>
-        <div class="container container-map">
-            <div id="map"></div>
+      </div>
+
+      <div id="map"></div>
+    </div>
+
+    <!--modal-->
+    <div class="modal hidden">
+      <form class="form">
+        <div class="form__row">
+          <label class="form__label">Type</label>
+          <select class="form__input form__input--type">
+            <option value="running">Running</option>
+            <option value="cycling">Cycling</option>
+          </select>
         </div>
-    </main>
-</body>
+        <div class="form__row">
+          <label class="form__label">Duration</label>
+          <input type="number" class="form__input form__input--duration" placeholder="min" />
+        </div>
+        <div class="form__row">
+          <label class="form__label">Distance</label>
+          <input type="number" class="form__input form__input--distance" placeholder="km" />
+        </div>
+        <div class="wrapper--btn-save-workout">
+          <button class="btn btn--save-workout">Save workout</button>
+        </div>
+      </form>
+    </div>
+  </body>
 </html>

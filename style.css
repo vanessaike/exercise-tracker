@@ -1,51 +1,221 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500&display=swap");
+
+/* GENERAL STYLES */
 
 :root {
-    --highlight-color: #87B4B4;
-    --main-color: #878888;
-    --bg-color: #F4F4F4
+  --highlight-color: #87b4b4;
+  --main-color: #878888;
+  --bg-color: #f4f4f4;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    font-size: 62.5%;
+  font-size: 62.5%;
 }
 
 body {
-    font-family: "Manrope", sans-serif;
-    background-color: var(--bg-color);
-    min-height: 100vh;
+  font-family: "Manrope", sans-serif;
 }
 
-main {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
 }
 
-/* TITLE */
-h1 {
-    color: var(--highlight-color);
-    font-size: 4rem;
-    font-weight: normal;
+input {
+  font-family: inherit;
+}
+
+li {
+  list-style: none;
 }
 
 hr {
-    height: 1px;
-    border: none;
-    background-color: var(--highlight-color);
+  height: 1px;
+  border: none;
+  background-color: var(--highlight-color);
+}
+
+.hidden {
+  display: none;
+}
+
+.wrapper--page {
+  display: flex;
+  flex-direction: row;
+}
+
+/* SIDEBAR */
+
+.title {
+  padding: 2rem;
+  color: var(--highlight-color);
+  font-size: 3rem;
+  font-weight: normal;
+}
+
+.title__icon {
+  color: var(--highlight-color);
+}
+
+.sidebar {
+  display: block;
+  height: 100vh;
+  width: 40%;
+  padding: 2rem;
+  background-color: var(--bg-color);
 }
 
 /* WORKOUTS */
-.container {
-    flex: 1;
+
+.workouts {
+  height: 80%;
+  overflow-y: auto;
+  padding: 1rem;
 }
 
-.container-workouts {
-    padding: 5rem;
+.workout {
+  padding: 1.5rem;
+  margin-top: 3rem;
+  font-size: 1.8rem;
+  border-radius: 0.5rem;
+  background: white;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.205));
+}
+
+.workout__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: var(--highlight-color);
+  font-weight: bold;
+}
+
+.workout__title i {
+  font-size: 2.5rem;
+}
+
+.workout__row {
+  display: flex;
+  flex-direction: row;
+}
+
+.workout__details {
+  margin: 1rem 2rem 0 0;
+  color: var(--main-color);
+}
+
+.btn--delete-workout {
+  color: var(--main-color);
+}
+
+.far {
+  pointer-events: none;
+}
+
+/* DELETE WORKOUTS BUTTON */
+
+.btn--reset {
+  color: white;
+  position: absolute;
+  bottom: 0;
+  margin: 3rem 0 2rem 0;
+  padding: 1rem;
+  border-radius: 100vh;
+  background: linear-gradient(180deg, #ca7064 0%, #e43d3d 100%);
+}
+
+.btn--reset:hover {
+  background: linear-gradient(180deg, #ca7064b9 0%, #e43d3dc9 100%);
+}
+
+/* MODAL WINDOW */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  background-color: rgba(19, 19, 19, 0.473);
+  backdrop-filter: blur(4px);
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 30rem;
+  height: 25rem;
+  z-index: 5;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  text-align: center;
+  border-radius: 0.5rem;
+  background-color: #f4f4f4;
+}
+
+.form__label {
+  font-weight: bold;
+}
+
+.form__input {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #e4e4e4;
+}
+
+.form__row {
+  margin-top: 2rem;
+}
+
+.wrapper--btn-save-workout {
+  margin-top: 5rem;
+}
+
+.btn--save-workout {
+  padding: 1rem;
+  color: white;
+  border-radius: 0.5rem;
+  background-color: #5494b8;
+}
+
+.btn--save-workout:hover {
+  background-color: #5493b8ad;
+}
+
+/* MAP */
+
+#map {
+  height: 100vh;
+  width: 100%;
+  cursor: pointer;
+  z-index: 1;
+}
+
+/* MARKERS */
+.leaflet-popup .leaflet-popup-content-wrapper {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.8rem;
+  color: white;
+  border-radius: 0.5rem;
+}
+
+.cycling-popup .leaflet-popup-content-wrapper,
+.cycling-popup .leaflet-popup-tip {
+  background-color: #64b8ca;
+}
+
+.running-popup .leaflet-popup-content-wrapper,
+.running-popup .leaflet-popup-tip {
+  background-color: #5494b8;
 }
