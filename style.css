@@ -6,6 +6,7 @@
   --highlight-color: #87b4b4;
   --main-color: #878888;
   --bg-color: #f4f4f4;
+  --hover-color: #6a9191;
 }
 
 * {
@@ -41,6 +42,10 @@ hr {
   height: 1px;
   border: none;
   background-color: var(--highlight-color);
+}
+
+select {
+  font-family: inherit;
 }
 
 .hidden {
@@ -153,7 +158,7 @@ hr {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 30rem;
+  width: 50rem;
   height: 25rem;
   z-index: 5;
   transform: translate(-50%, -50%);
@@ -165,6 +170,7 @@ hr {
 
 .form__label {
   font-weight: bold;
+  margin-right: 0.8rem;
 }
 
 .form__input {
@@ -186,11 +192,11 @@ hr {
   padding: 1rem;
   color: white;
   border-radius: 0.5rem;
-  background-color: #5494b8;
+  background-color: var(--highlight-color);
 }
 
 .btn--save-workout:hover {
-  background-color: #5493b8ad;
+  background-color: var(--hover-color);
 }
 
 /* MAP */

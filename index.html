@@ -15,7 +15,7 @@
       crossorigin=""
     ></script>
     <script src="https://kit.fontawesome.com/81837a0584.js" crossorigin="anonymous"></script>
-    <script defer src="dist/main.js"></script>
+    <script defer src="dist/app.js" type="module"></script>
     <link rel="stylesheet" href="style.css" />
     <title>Exercise Tracker</title>
   </head>
@@ -27,7 +27,7 @@
         <hr />
 
         <ul class="workouts">
-          <!-- <li class="workout workout--running" data-id="123456">
+          <li class="workout workout--running" data-id="123456">
             <div class="workout__header">
               <div class="workout__title" aria-label="running">
                 <i class="fas fa-running" aria-hidden="true"></i> Running
@@ -52,7 +52,7 @@
                 <span class="workout__unit">km</span>
               </div>
             </div>
-          </li> -->
+          </li>
         </ul>
 
         <div class="wrapper--btn-reset">
@@ -69,8 +69,9 @@
         <div class="form__row">
           <label class="form__label">Type</label>
           <select class="form__input form__input--type">
-            <option value="running">Running</option>
-            <option value="cycling">Cycling</option>
+            <option value="RUNNING">Running</option>
+            <option value="BIKING">Biking</option>
+            <option value="WALKING">Walking</option>
           </select>
         </div>
         <div class="form__row">
