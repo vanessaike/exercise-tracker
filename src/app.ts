@@ -8,6 +8,7 @@ const workoutForm = document.querySelector(".form")! as HTMLFormElement;
 const inputWorkoutType = document.querySelector(".form__input--type")! as HTMLSelectElement;
 const inputWorkoutDuration = document.querySelector(".form__input--duration")! as HTMLInputElement;
 const inputWorkoutDistance = document.querySelector(".form__input--distance")! as HTMLInputElement;
+const btnDeleteAllWorkouts = document.querySelector(".btn--reset");
 
 class App {
   map!: L.Map;
@@ -21,6 +22,7 @@ class App {
     workoutForm.addEventListener("submit", this.newWorkout.bind(this));
     containerWorkouts.addEventListener("click", this.moveToMarker.bind(this));
     containerWorkouts.addEventListener("click", this.deleteWorkout.bind(this));
+    btnDeleteAllWorkouts?.addEventListener("click", this.deleteAllWorkouts.bind(this));
   }
 
   getPosition() {
@@ -142,6 +144,12 @@ class App {
         workoutEl.remove();
       }
     }
+  }
+
+  deleteAllWorkouts() {
+    this.workouts.splice(0, this.workouts.length);
+    containerWorkouts.innerHTML = "";
+    this.mapMarkers.forEach((marker) => this.map.removeLayer(marker));
   }
 
   moveToMarker(event: Event) {
