@@ -8,7 +8,6 @@ const workoutForm = document.querySelector(".form")! as HTMLFormElement;
 const inputWorkoutType = document.querySelector(".form__input--type")! as HTMLSelectElement;
 const inputWorkoutDuration = document.querySelector(".form__input--duration")! as HTMLInputElement;
 const inputWorkoutDistance = document.querySelector(".form__input--distance")! as HTMLInputElement;
-const btnSaveWorkout = document.querySelector(".btn--save-workout")! as HTMLButtonElement;
 
 class App {
   map!: L.Map;
@@ -20,6 +19,8 @@ class App {
     this.getPosition();
     overlay.addEventListener("click", this.closeModal.bind(this));
     workoutForm.addEventListener("submit", this.newWorkout.bind(this));
+    containerWorkouts.addEventListener("click", this.moveToMarker.bind(this));
+    containerWorkouts.addEventListener("click", this.deleteWorkout.bind(this));
   }
 
   getPosition() {
@@ -68,6 +69,8 @@ class App {
     this.renderMarker(workout);
     this.renderWorkout(workout);
     this.closeModal();
+    // clear input fields
+    inputWorkoutDistance.value = inputWorkoutDuration.value = "";
   }
 
   renderMarker(workout: Workout) {
@@ -122,6 +125,35 @@ class App {
     `;
 
     containerWorkouts.insertAdjacentHTML("afterbegin", html);
+  }
+
+  deleteWorkout(event: Event) {
+    if (event.target instanceof HTMLElement) {
+      const workoutEl = event.target.closest(".workout");
+      if (!workoutEl) return;
+
+      if (event.target.classList.contains("btn--delete-workout")) {
+        const workoutIndex = this.workouts.findIndex((workout) => workout.id === (workoutEl as HTMLElement).dataset.id);
+        // delete marker
+        this.map.removeLayer(this.mapMarkers[workoutIndex]);
+        this.mapMarkers.splice(workoutIndex, 1);
+        // delete the element from the UI
+        this.workouts.splice(workoutIndex, 1);
+        workoutEl.remove();
+      }
+    }
+  }
+
+  moveToMarker(event: Event) {
+    if (event.target instanceof HTMLElement) {
+      const workoutEl = event.target.closest(".workout");
+      if (!workoutEl) return;
+
+      // find the workout that matches the one we clicked
+      const workout = this.workouts.find((workout) => workout.id === (workoutEl as HTMLElement).dataset.id);
+      // take the coordinates from the element and move to the position
+      this.map.setView(workout?.coords as LatLngExpression, 13, { animate: true });
+    }
   }
 
   openModal(mapEvent: LeafletMouseEvent) {
