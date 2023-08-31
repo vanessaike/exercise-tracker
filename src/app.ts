@@ -23,6 +23,7 @@ class App {
     containerWorkouts.addEventListener("click", this.moveToMarker.bind(this));
     containerWorkouts.addEventListener("click", this.deleteWorkout.bind(this));
     btnDeleteAllWorkouts?.addEventListener("click", this.deleteAllWorkouts.bind(this));
+    setTimeout(() => this.getLocalStorage(), 3000);
   }
 
   getPosition() {
@@ -73,6 +74,7 @@ class App {
     this.closeModal();
     // clear input fields
     inputWorkoutDistance.value = inputWorkoutDuration.value = "";
+    this.setLocalStorage();
   }
 
   renderMarker(workout: Workout) {
@@ -150,6 +152,8 @@ class App {
     this.workouts.splice(0, this.workouts.length);
     containerWorkouts.innerHTML = "";
     this.mapMarkers.forEach((marker) => this.map.removeLayer(marker));
+    // delete from local storage
+    localStorage.clear();
   }
 
   moveToMarker(event: Event) {
@@ -162,6 +166,22 @@ class App {
       // take the coordinates from the element and move to the position
       this.map.setView(workout?.coords as LatLngExpression, 13, { animate: true });
     }
+  }
+
+  setLocalStorage() {
+    localStorage.setItem("workouts", JSON.stringify(this.workouts));
+  }
+
+  getLocalStorage() {
+    const workoutsData = JSON.parse(localStorage.getItem("workouts") as string);
+    if (!workoutsData) return;
+    this.workouts = workoutsData;
+    this.workouts.forEach((workout) => {
+      this.renderWorkout(workout);
+      if (this.map) {
+        this.renderMarker(workout);
+      }
+    });
   }
 
   openModal(mapEvent: LeafletMouseEvent) {
