@@ -8,6 +8,7 @@ This project was made to practice some TypeScript concepts. I initially made it 
 
 # Requirements
 
+- NodeJS installed
 - TypeScript installed
   ```bash
   npm install -g typescript
