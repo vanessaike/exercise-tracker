@@ -1,5 +1,7 @@
 import { LatLngExpression, LeafletMouseEvent } from "leaflet";
 import { Workout } from "./types/classes/Workout.js";
+import { renderWorkout } from "./components/workout.js";
+import { renderPopupContent } from "./components/popup.js";
 
 const modal = document.querySelector(".modal")! as HTMLElement;
 const overlay = document.querySelector(".overlay")! as HTMLElement;
@@ -23,7 +25,7 @@ class App {
     containerWorkouts.addEventListener("click", this.moveToMarker.bind(this));
     containerWorkouts.addEventListener("click", this.deleteWorkout.bind(this));
     btnDeleteAllWorkouts?.addEventListener("click", this.deleteAllWorkouts.bind(this));
-    setTimeout(() => this.getLocalStorage(), 3000);
+    setTimeout(() => this.getLocalStorage(), 2000);
   }
 
   getPosition() {
@@ -91,7 +93,7 @@ class App {
           className: "popup",
         })
       )
-      .setPopupContent(`<i class="fas fa-${type}" aria-hidden="true"></i> ` + type.toUpperCase())
+      .setPopupContent(renderPopupContent(type) + type.charAt(0).toUpperCase() + type.slice(1))
       .openPopup();
 
     this.mapMarkers.push(marker);
@@ -99,34 +101,7 @@ class App {
 
   renderWorkout(workout: Workout) {
     const type = workout.type.toLowerCase();
-    const html = `
-      <li class="workout workout--${type}" data-id="${workout.id}">
-        <div class="workout__header">
-          <div class="workout__title" aria-label="${type}">
-            <i class="fas fa-${type}" aria-hidden="true"></i> ${workout.type}
-          </div>
-          <button class="btn btn--delete-workout" aria-label="Delete workout">
-            <i class="far fa-times-circle" aria-hidden="true"></i>
-          </button>
-        </div>
-        <div class="workout__row">
-          <div class="workout__details">
-            <span class="workout__icon"><i class="fas fa-calendar-alt" aria-hidden="true"></i></span>
-            <span class="workout__value">08/22/2023</span>
-          </div>
-          <div class="workout__details">
-            <span class="workout__icon"><i class="fas fa-stopwatch" aria-hidden="true"></i></span>
-            <span class="workout__value">${workout.duration}</span>
-            <span class="workout__unit">min</span>
-          </div>
-          <div class="workout__details">
-            <span class="workout__icon"><i class="fas fa-bolt" aria-hidden="true"></i></span>
-            <span class="workout__value">${workout.distance}</span>
-            <span class="workout__unit">km</span>
-          </div>
-        </div>
-      </li>
-    `;
+    const html = renderWorkout(type, workout);
 
     containerWorkouts.insertAdjacentHTML("afterbegin", html);
   }
@@ -144,6 +119,7 @@ class App {
         // delete the element from the UI
         this.workouts.splice(workoutIndex, 1);
         workoutEl.remove();
+        this.setLocalStorage();
       }
     }
   }
